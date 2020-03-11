@@ -10,7 +10,7 @@ CREATE TABLE products (
     item_id INTEGER UNIQUE AUTO_INCREMENT, /*Unique ID that auto increments*/
     product_name VARCHAR (100) NOT NULL,
     department_name VARCHAR (100) NOT NULL,
-    price DECIMAL NOT NULL,
+    price FLOAT NOT NULL,
     stock_quantity INTEGER NOT NULL, /*will represent how much of the product is available*/
     PRIMARY KEY (item_id)
 );
