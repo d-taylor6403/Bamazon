@@ -24,6 +24,7 @@ connection.connect(function(err) {
     managerOptions();
 })
 
+//function to prompt manager for initial action
 function managerOptions() {
     inquirer.prompt({
         name: 'action',
@@ -62,9 +63,53 @@ function saleInventory() {
         if (err) throw err;
 
         //Display entire products table
+        console.log(divider);
         console.table(res);
         console.log("Now Viewing All Products for Sale.")
         console.log(divider);
-        managerOptions();
+        inventoryOptions();
+        
     })
+}
+
+//Displays after the manager views all sale inventory to provide additional actions
+function inventoryOptions() {
+    inquirer.prompt({
+        name: 'action',
+        type: 'list',
+        message: 'What would you like to do?',
+        choices: ['Add to Inventory', 'Add New Product', 'Exit']
+    })
+    .then(function(answer) {
+        switch (answer.action) {
+            case 'Add to Inventory': //calls function to add to existing inventory to database
+                addInventory();
+                break;
+
+            case 'Add New Product': //calls function to add a new item to the store
+                newProduct();
+                break;
+            
+            case 'Exit'://Calls connection.ed to exist the sore
+                console.log("Exiting Manager View. Goodbye!")
+                connection.end();
+                break;
+        }
+    });
+}
+
+function lowInventory() {
+    connection.query("SELECT * FROM products WHERE stock_quantity <=0", function(err, res) {
+        if (err) throw err;
+
+        //Display products table with low inventory
+        console.table(res);
+        console.log("Now viewing low inventory.")
+        console.log(divider);
+        inventoryOptions();
+    })
+}
+
+function addInventory() {
+    
 }
