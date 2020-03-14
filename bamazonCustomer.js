@@ -22,7 +22,7 @@ connection.connect(function(err) {
     if (err) throw err;
     console.log(divider);
         readProducts();
-});
+})
 
 function readProducts() {
     connection.query("SELECT * FROM products", function(err, res) {
@@ -33,8 +33,45 @@ function readProducts() {
         console.log("Connected: Welcome to Bamazon.")
         console.log(divider);
         userOptions();
-    });
-};
+    })
+}
+
+//Function to update
+function updateProduct(data, remainingStock) {
+    if (remainingStock > 0) {
+        var query = connection.query(
+            "UPDATE products SET ? WHERE ?",
+            [{
+                    stock_quantity: remainingStock
+                },
+                {
+                    item_id: data[0].item_id
+                }
+            
+            ],
+            function (err, res) {
+                if (err) throw err;
+                console.log(data[0].product_name + 'products have been updated!\n');
+            }
+        );
+    } else {
+        var query = connection.query(
+            "UPDATE products SET ? WHERE ?",
+            [{
+                stock_quantity: 0
+            },
+            {
+                item_id: data[0].item_id
+            }
+            ],
+            function (err, res) {
+                if(err) throw err;
+                console.log(`No more products in stock. Come back later!\n`);
+                userOptions();
+            }
+        );
+    }
+}
 
 //Function to prompt user for initial action
 function userOptions() {
@@ -103,32 +140,13 @@ function customerPrompts() {
 
                     console.log(divider);
                     updateProduct(data, remainingStock); //calls function to update the database
-
+                    
                     console.log("Order Summary:\n\n" + "Total Cost: $" + totalCost.toFixed(2) + "\nRemaining Stock: " + remainingStock); //Logs purchase details
-                    readProducts(); //Reads the table and starts user prompts again
-                }
-            )
-        })
-    }
-)
+                    
+                    
+                    
+                })
+        });
+    })
 });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
