@@ -52,6 +52,7 @@ function updateProduct(data, remainingStock) {
             function (err, res) {
                 if (err) throw err;
                 console.log(data[0].product_name + 'products have been updated!\n');
+                
             }
         );
     } else {
@@ -140,10 +141,10 @@ function customerPrompts() {
 
                     console.log(divider);
                     updateProduct(data, remainingStock); //calls function to update the database
+
                     
                     console.log("Order Summary:\n\n" + "Total Cost: $" + totalCost.toFixed(2) + "\nRemaining Stock: " + remainingStock); //Logs purchase details
-                    
-                    
+                    readProducts();
                     
                 })
         });
