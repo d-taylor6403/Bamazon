@@ -90,11 +90,15 @@ function userOptions() {
                 break;
 
             case 'Exit': 
-                console.log("Thank-you for shopping. Goodbye!")
-                connection.end();
+                exit();
                 break;
         }
     });
+}
+
+function exit() {
+    console.log("Thank-you for shopping. Goodbye!")
+    connection.end();
 }
 
 function customerPrompts() {

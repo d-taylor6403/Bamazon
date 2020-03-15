@@ -52,9 +52,11 @@ function managerOptions() {
                 break;
             
             case 'Exit':
-                console.log("Exiting Manager View...")
                 connection.end();
+                console.log("Exiting Manager View...")
                 break;
+                
+                
         }
     });
 }
@@ -95,6 +97,7 @@ function inventoryOptions() {
                 console.log("Returning to Main Menu!")
                 managerOptions();
                 break;
+                
         }
     });
 }
@@ -115,7 +118,7 @@ function addInventoryPrompt() {
     connection.query("SELECT * FROM products", function(err, res) {
         if (err) throw err;
         console.table(res);
-        
+
     inquirer.prompt({
         name: 'inventory_item',
         type: 'input',
@@ -153,8 +156,10 @@ function addInventoryPrompt() {
                     console.log(divider);
                     updateProduct(updatedStock, itemSelected); //calls function to update existing stock
 
-                    lowInventory();
+                    
                     console.log( `Product Added: ${res[0].product_name}  Number of Items added: ${answer2.product_options}`)//Logs inventory addition
+                    console.log(divider);
+                    managerOptions();
                     
                 })
             })
