@@ -114,10 +114,10 @@ function customerPrompts() {
             item_id: answer.store_options
         }, function (err, res) {
             if (err) throw err;
-            console.log("You've slected... || Product Name: " + res[0].product_name + "\n");
+            console.log("You've selected... || Product Name: " + res[0].product_name + "\n");
 
             inquirer.prompt({
-                name: 'product_options',
+                name: "product_options",
                 type: "input",
                 message: "How many would you like to buy?",
                 validate: function (value){ //checks user input to ensure value entered is a number
