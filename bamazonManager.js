@@ -1,6 +1,7 @@
 //Require Dependencies ================================
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+var main = require('./mainMenu')
 require('console.table');
 
 var divider = '\n================================================================================================\n'
@@ -20,8 +21,8 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    console.log(divider);
-    managerOptions();
+    //console.log(divider);
+    //managerOptions();
 })
 
 //function to prompt manager for initial action
@@ -30,7 +31,7 @@ function managerOptions() {
         name: 'action',
         type: 'list',
         message: 'What would you like to do?',
-        choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', 'Exit']
+        choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', 'Return To Main Menu']
     })
     .then(function(answer) {
         switch (answer.action) {
@@ -50,9 +51,9 @@ function managerOptions() {
                 newProduct();
                 break;
             
-            case 'Exit'://Calls connection.ed to exist the sore
-                console.log("Exiting Manager View. Goodbye!")
-                connection.end();
+            case 'Return to Main Menu'://Returns the user to the main menu
+                console.log("Exiting Manager View...")
+                main.readMainMenu();
                 break;
         }
     });
@@ -210,4 +211,8 @@ function newProduct() {
 function addNewProduct(product, departmentName, price, quantity) {
     connection.query('INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ("' + product + '","' + departmentName + '", ' + price + ', ' + quantity + ')');
     saleInventory();
+};
+
+module.exports = {
+    managerOptions
 };

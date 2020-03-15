@@ -1,6 +1,7 @@
 //Require Dependencies ================================
 var mysql = require('mysql');
 var inquirer = require('inquirer');
+var main = require('./mainMenu')
 require('console.table');
 
 var divider = '\n================================================================================================\n'
@@ -20,8 +21,8 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    console.log(divider);
-    readProducts();
+    //console.log(divider);
+    //readProducts();
 })
 
 function readProducts() {
@@ -80,7 +81,7 @@ function userOptions() {
         name: 'action',
         type: 'list',
         message: 'How Can I Help You Today?',
-        choices: ['Make A Purchase', 'Exit']
+        choices: ['Make A Purchase', 'Return to Main Menu']
     })
     .then(function(answer) {
         switch (answer.action) {
@@ -88,9 +89,9 @@ function userOptions() {
                 customerPrompts(); 
                 break;
 
-            case 'Exit': //Calls connection.end to exit the store
+            case 'Return to Main Menu': //Returns user to Main Menu
                 console.log("Thank-you for shopping. Goodbye!")
-                connection.end();
+                main.readMainMenu();
                 break;
         }
     });
@@ -151,3 +152,7 @@ function customerPrompts() {
     })
 });
 }
+
+module.exports = {
+    readProducts
+};
