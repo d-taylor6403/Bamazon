@@ -31,7 +31,7 @@ function managerOptions() {
         name: 'action',
         type: 'list',
         message: 'What would you like to do?',
-        choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', 'Exit']
+        choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product']
     })
     .then(function(answer) {
         switch (answer.action) {
@@ -50,13 +50,6 @@ function managerOptions() {
             case 'Add New Product': //calls function to add a new item to the store
                 newProduct();
                 break;
-            
-            case 'Exit':
-                connection.end();
-                console.log("Exiting Manager View...")
-                break;
-                
-                
         }
     });
 }

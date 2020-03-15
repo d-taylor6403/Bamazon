@@ -81,7 +81,7 @@ function userOptions() {
         name: 'action',
         type: 'list',
         message: 'How Can I Help You Today?',
-        choices: ['Make A Purchase', 'Exit']
+        choices: ['Make A Purchase']
     })
     .then(function(answer) {
         switch (answer.action) {
