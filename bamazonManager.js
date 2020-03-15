@@ -44,7 +44,7 @@ function managerOptions() {
                 break;
             
             case 'Add to Inventory': //calls function to add to existing inventory to database
-                addInventory();
+                addInventoryPrompt()
                 break;
 
             case 'Add New Product': //calls function to add a new item to the store
@@ -112,6 +112,10 @@ function lowInventory() {
 }
 
 function addInventoryPrompt() {
+    connection.query("SELECT * FROM products", function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        
     inquirer.prompt({
         name: 'inventory_item',
         type: 'input',
@@ -156,7 +160,9 @@ function addInventoryPrompt() {
             })
         })
     })
+})
 }
+
 
 //function to add the existing inventory items to the database
 function updateProduct(updatedStock, itemSelected) {
