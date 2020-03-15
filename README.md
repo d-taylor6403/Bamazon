@@ -6,7 +6,7 @@ The goal of this assignment was to demonstrate the knowledge necessary to merge 
 
 This app integrates a customer module, that allows the customer to make a purchase as well as a manager module, that allows the manager to review all sales, low inventory as well as add new products. 
 
-A video demonstration can be viewed [here] (https://drive.google.com/file/d/1-mQW_sI3wAFuQfEBa_LZjWLWiCNT5L8L/view)
+A video demonstration can be viewed [here](https://drive.google.com/file/d/1-mQW_sI3wAFuQfEBa_LZjWLWiCNT5L8L/view) 
 
 ## Overview of the App
 #### Requires All Node Package Installations including:
