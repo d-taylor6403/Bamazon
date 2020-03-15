@@ -81,7 +81,7 @@ function userOptions() {
         name: 'action',
         type: 'list',
         message: 'How Can I Help You Today?',
-        choices: ['Make A Purchase', 'Return to Main Menu']
+        choices: ['Make A Purchase', 'Exit']
     })
     .then(function(answer) {
         switch (answer.action) {
@@ -89,9 +89,9 @@ function userOptions() {
                 customerPrompts(); 
                 break;
 
-            case 'Return to Main Menu': //Returns user to Main Menu
+            case 'Exit': 
                 console.log("Thank-you for shopping. Goodbye!")
-                main.readMainMenu();
+                connection.end();
                 break;
         }
     });

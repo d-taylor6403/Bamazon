@@ -31,7 +31,7 @@ function managerOptions() {
         name: 'action',
         type: 'list',
         message: 'What would you like to do?',
-        choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', 'Return To Main Menu']
+        choices: ['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', 'Exit']
     })
     .then(function(answer) {
         switch (answer.action) {
@@ -51,9 +51,9 @@ function managerOptions() {
                 newProduct();
                 break;
             
-            case 'Return to Main Menu'://Returns the user to the main menu
+            case 'Exit':
                 console.log("Exiting Manager View...")
-                main.readMainMenu();
+                connection.end();
                 break;
         }
     });
